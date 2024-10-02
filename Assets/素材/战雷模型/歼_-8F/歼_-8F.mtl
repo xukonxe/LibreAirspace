@@ -1,0 +1,119 @@
+newmtl 04021bb2-fcd3-4f50-b36a-629b757b3871
+Kd 1.000 1.000 1.000
+Ks 0.176 0.176 0.176
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3218257701282357_j_8f_c.jpg
+map_Ks textures/3218257701282357_j_8f_n_s.jpg
+map_normal textures/3218257701282357_j_8f_n_n.jpg
+map_ao textures/3218257701282357_j_8f_n_ao.jpg
+
+newmtl cd076e87-5432-455d-9097-0012e216523e
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.1
+
+newmtl 081beb02-58e4-437b-b3de-76203868a647
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_23m_pylon_3_c.jpg
+map_Ks textures/3056032328484951_mig_23m_pylon_3_n_s.jpg
+map_normal textures/3056032328484951_mig_23m_pylon_3_n_n.jpg
+map_ao textures/3056032328484951_mig_23m_pylon_3_n_ao.jpg
+
+newmtl 194f1940-8b5e-484e-9de7-cde18da82de8
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/393673031690056_pl_8_c.jpg
+map_Ks textures/393673031690056_pl_8_n_s.jpg
+map_normal textures/393673031690056_pl_8_n_n.jpg
+map_ao textures/393673031690056_pl_8_n_ao.jpg
+
+newmtl 4dc1096f-d5e0-41e4-9809-11077879165f
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.8
+
+newmtl 5c7679b7-d894-4983-bf07-a7f462298cc6
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/5493280949605449_apu_13_c.jpg
+map_Ks textures/5493280949605449_apu_13_n_s.jpg
+map_normal textures/5493280949605449_apu_13_n_n.jpg
+map_ao textures/5493280949605449_apu_13_n_ao.jpg
+
+newmtl 48aa537e-79d6-4720-893f-aabafcafe664
+Kd 1.000 1.000 1.000
+Ks 0.502 0.502 0.502
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/393673031690056_pl_12_missile_c.jpg
+map_Ks textures/393673031690056_pl_12_missile_n_s.jpg
+map_normal textures/393673031690056_pl_12_missile_n_n.jpg
+map_ao textures/393673031690056_pl_12_missile_n_ao.jpg
+
+newmtl 92630786-58bf-4326-b9d9-f43cc002cf7a
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/985252242869640_lanciamissili_mraam_white_c.jpg
+map_Ks textures/985252242869640_lanciamissili_mraam_n_s.jpg
+map_normal textures/985252242869640_lanciamissili_mraam_n_n.jpg
+map_ao textures/985252242869640_lanciamissili_mraam_n_ao.jpg
+
+newmtl b6b51062-d41f-4549-83d5-63ca3d85721d
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3218257701282357_j_8b_inside_c.jpg
+map_Ks textures/3218257701282357_j_8b_inside_n_s.jpg
+map_normal textures/3218257701282357_j_8b_inside_n_n.jpg
+map_ao textures/3218257701282357_j_8b_inside_n_ao.jpg
+map_d textures/3218257701282357_j_8b_inside_c_a.png
+
+newmtl 2a1b21b9-0d22-4c81-86d7-369bc272047b
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.9
+
+newmtl c3a51d91-4bba-4836-ad8d-0231fd9c5c79
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/7900379809312169_ch_1140l_drop_tank_pylon_c.jpg
+map_Ks textures/7900379809312169_ch_1140l_drop_tank_pylon_n_s.jpg
+map_normal textures/7900379809312169_ch_1140l_drop_tank_pylon_n_n.jpg
+map_ao textures/7900379809312169_ch_1140l_drop_tank_pylon_n_ao.jpg
+
+newmtl 874ec1c4-477a-414e-a0c0-a4da7933e328
+Kd 1.000 1.000 1.000
+Ks 0.176 0.176 0.176
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3218257701282357_j_8f_add_c.jpg
+map_Ks textures/3218257701282357_j_8f_add_n_s.jpg
+map_normal textures/3218257701282357_j_8f_add_n_n.jpg
+map_ao textures/3218257701282357_j_8f_add_n_ao.jpg
+
+newmtl c703ad03-9da5-4ab6-99b5-e8781e50c7c1
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.9
+

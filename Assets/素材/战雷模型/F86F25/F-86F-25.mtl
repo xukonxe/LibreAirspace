@@ -1,0 +1,39 @@
+newmtl e59898d4-5046-4a32-885e-b1e2226cf0c1
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3957445006151402_f_86f25_c.jpg
+map_Ks textures/3957445006151402_f_86f25_n_s.jpg
+map_normal textures/3957445006151402_f_86f25_n_n.jpg
+map_ao textures/3957445006151402_f_86f25_n_ao.jpg
+
+newmtl 268eb0e4-5092-4dee-921e-4d23a0b66c9d
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3957445006151402_f_86_tex2_c.jpg
+map_Ks textures/3957445006151402_f_86_tex2_n_s.jpg
+map_normal textures/3957445006151402_f_86_tex2_n_n.jpg
+map_ao textures/3957445006151402_f_86_tex2_n_ao.jpg
+map_d textures/3957445006151402_f_86_tex2_c_a.png
+
+newmtl 7f878811-5171-4c7b-be69-c2d5197fac22
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.17
+
+newmtl 4a5b52ce-caf8-4e22-bf19-2dec2ac1115b
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/5493280949605449_aircraft_inside.jpg
+map_Ks textures/5493280949605449_aircraft_inside_n_s.jpg
+map_normal textures/5493280949605449_aircraft_inside_n_n.jpg
+map_ao textures/5493280949605449_aircraft_inside_n_ao.jpg
+map_d textures/5493280949605449_aircraft_inside_a.png
+

@@ -1,0 +1,15 @@
+newmtl model_1
+map_Kd tex\\Marin_Kitagawa_EYES.tga.jpeg
+
+newmtl model_2
+map_Kd tex\\Marin_Kitagawa_UNIFORM_BASE.tga.jpeg
+
+newmtl model_3
+map_Kd tex\\Marin_Kitagawa_UNIFORM_BASE.tga.jpeg
+
+newmtl model_4
+map_Kd tex\\Marin_Kitagawa_BODY_BASE.tga.jpeg
+
+newmtl model_8
+map_Kd tex\\Marin_Kitagawa_SWIMSUIT_BASE.tga.jpeg
+

@@ -1,0 +1,96 @@
+newmtl de7d4c11-3fec-420e-8b79-74f929ffad63
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3957445006151402_f_4c_c.jpg
+map_Ks textures/3957445006151402_f_4c_n_s.jpg
+map_normal textures/3957445006151402_f_4c_n_n.jpg
+map_ao textures/3957445006151402_f_4c_n_ao.jpg
+
+newmtl 69b13212-64ae-4ad4-a473-74344a0074c5
+Kd 0.000 0.000 0.000
+Ks 1.000 1.000 1.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.17
+
+newmtl 97aa0e7e-7fe0-44e0-b6c2-c8a56f71d9fd
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3957445006151402_f_4c_interior_c.jpg
+map_Ks textures/3957445006151402_f_4c_interior_n_s.jpg
+map_normal textures/3957445006151402_f_4c_interior_n_n.jpg
+map_ao textures/3957445006151402_f_4c_interior_n_ao.jpg
+
+newmtl 7ea86c9c-ec81-42db-adb9-9cb18ccde8ac
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3957445006151402_f_4c_inside_c.jpg
+map_Ks textures/3957445006151402_f_4c_inside_n_s.jpg
+map_normal textures/3957445006151402_f_4c_inside_n_n.jpg
+map_ao textures/3957445006151402_f_4c_inside_n_ao.jpg
+map_d textures/3957445006151402_f_4c_inside_c_a.png
+
+newmtl da6ea79c-4d70-4e7f-a2a3-3812b7410ab1
+Kd 0.000 0.000 0.000
+Ks 1.000 1.000 1.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.15
+
+newmtl a8ea06ef-44aa-4426-9990-b8c563d4aed1
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3957445006151402_f_4c_pylon3_c.jpg
+map_Ks textures/3957445006151402_f_4c_pylon3_n_s.jpg
+map_normal textures/3957445006151402_f_4c_pylon3_n_n.jpg
+map_ao textures/3957445006151402_f_4c_pylon3_n_ao.jpg
+
+newmtl 83094890-c15c-4f41-9485-e87ba143e5eb
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/2847996197891482_us_m61_gun_c.jpg
+map_Ks textures/2847996197891482_us_m61_gun_n_s.jpg
+map_normal textures/2847996197891482_us_m61_gun_n_n.jpg
+map_ao textures/2847996197891482_us_m61_gun_n_ao.jpg
+
+newmtl 5b75a295-686f-4102-b096-07af726d6214
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/2847996197891482_us_suu_23a_pod_c.jpg
+map_Ks textures/2847996197891482_us_suu_23a_pod_n_s.jpg
+map_normal textures/2847996197891482_us_suu_23a_pod_n_n.jpg
+map_ao textures/2847996197891482_us_suu_23a_pod_n_ao.jpg
+
+newmtl 01ab41ff-e3d2-430d-be0d-226d3838757c
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.8
+
+newmtl 454baf52-e39e-4ee5-9a64-55fa40ae043f
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.9
+
+newmtl dbd3cc28-66d1-43a4-a1ca-53fdb5b73583
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.8
+

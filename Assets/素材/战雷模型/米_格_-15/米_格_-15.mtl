@@ -1,0 +1,37 @@
+newmtl f8351087-2d56-4a29-aa07-363b45fcc230
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_15_a.jpg
+map_Ks textures/3056032328484951_mig_15_n_s.jpg
+map_normal textures/3056032328484951_mig_15_n_n.jpg
+map_ao textures/3056032328484951_mig_15_n_ao.jpg
+
+newmtl 01bb7eae-6250-4fd8-85ae-da34888ddb28
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.17
+
+newmtl f3bf8899-5f27-474c-bd8a-d8ea30fb803e
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_15_a_inside.jpg
+map_Ks textures/3056032328484951_mig_15_n_inside_s.jpg
+map_normal textures/3056032328484951_mig_15_n_inside_n.jpg
+map_ao textures/3056032328484951_mig_15_n_inside_ao.jpg
+map_d textures/3056032328484951_mig_15_a_inside_a.png
+
+newmtl afe6c84b-fb67-459d-84b0-7e94485ec82d
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+d 1
+map_Kd textures/6729213380750076_barrage_balloon_rope.jpg
+map_d textures/6729213380750076_barrage_balloon_rope_a.png
+

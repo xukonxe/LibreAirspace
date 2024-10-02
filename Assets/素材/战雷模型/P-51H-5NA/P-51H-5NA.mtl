@@ -1,0 +1,69 @@
+newmtl 2ceca64b-40a1-4360-8b73-59ae3f73476e
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/4659014021151212_p_51h_10_1947_a.jpg
+map_Ks textures/4659014021151212_p_51h_10_1947_n_s.jpg
+map_normal textures/4659014021151212_p_51h_10_1947_n_n.jpg
+map_ao textures/4659014021151212_p_51h_10_1947_n_ao.jpg
+
+newmtl ec26eaac-b2ac-48ef-b8ae-f65f7c332a0e
+Kd 0.000 0.000 0.000
+Ks 1.000 1.000 1.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.1
+
+newmtl d5a1e9fc-5bb0-4506-bde7-bc2563c11092
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/4659014021151212_p_51d_inside_a.jpg
+map_Ks textures/4659014021151212_p_51d_inside_n_s.jpg
+map_normal textures/4659014021151212_p_51d_inside_n_n.jpg
+map_ao textures/4659014021151212_p_51d_inside_n_ao.jpg
+map_d textures/4659014021151212_p_51d_inside_a_a.png
+
+newmtl 41317a23-eb10-49ff-b1a2-c2c502318ebb
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+d 1
+map_Kd textures/6729213380750076_barrage_balloon_rope.jpg
+map_d textures/6729213380750076_barrage_balloon_rope_a.png
+
+newmtl 7026a693-6f6b-4dd1-9b88-730f63062bec
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/6729213380750076_browning_m2_50_fixed_a.jpg
+map_Ks textures/6729213380750076_browning_m2_50_fixed_n_s.jpg
+map_normal textures/6729213380750076_browning_m2_50_fixed_n_n.jpg
+map_ao textures/6729213380750076_browning_m2_50_fixed_n_ao.jpg
+map_d textures/6729213380750076_browning_m2_50_fixed_a_a.png
+
+newmtl 1c3af6cb-010b-4a13-8703-083b855701eb
+Kd 0.000 0.000 0.000
+Ks 1.000 1.000 1.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+
+newmtl 8c9c9596-f0d4-4105-93c5-cf1a9811e1d3
+Kd 0.000 0.000 0.000
+Ks 1.000 1.000 1.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+
+newmtl ec3c3398-4413-47c0-a3e2-4f2985b2d2aa
+Kd 0.000 0.000 0.000
+Ks 1.000 1.000 1.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+

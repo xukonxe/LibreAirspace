@@ -1,0 +1,85 @@
+newmtl 0a8a274c-68c6-41cd-89e9-4065a2995179
+Kd 1.000 1.000 1.000
+Ks 0.176 0.176 0.176
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_21_pfm_c.jpg
+map_Ks textures/3056032328484951_mig_21_pfm_n_s.jpg
+map_normal textures/3056032328484951_mig_21_pfm_n_n.jpg
+map_ao textures/3056032328484951_mig_21_pfm_n_ao.jpg
+
+newmtl 5d14e56d-62a2-488e-a3e3-e2122acd7809
+Kd 1.000 1.000 1.000
+Ks 0.176 0.176 0.176
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_21_pfm_autocannon_c.jpg
+map_Ks textures/3056032328484951_mig_21_pfm_autocannon_n_s.jpg
+map_normal textures/3056032328484951_mig_21_pfm_autocannon_n_n.jpg
+map_ao textures/3056032328484951_mig_21_pfm_autocannon_n_ao.jpg
+
+newmtl 663d1362-5d38-41a2-bd0c-93ff6c9c086b
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_21_mf_inside_c.jpg
+map_Ks textures/3056032328484951_mig_21_mf_inside_n_s.jpg
+map_normal textures/3056032328484951_mig_21_mf_inside_n_n.jpg
+map_ao textures/3056032328484951_mig_21_mf_inside_n_ao.jpg
+
+newmtl 9123be64-bc32-4070-9219-c2fd88d94549
+Kd 1.000 1.000 1.000
+Ks 0.000 0.000 0.000
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_21_pfm_interior_c.jpg
+map_Ks textures/3056032328484951_mig_21_pfm_interior_n_s.jpg
+map_normal textures/3056032328484951_mig_21_pfm_interior_n_n.jpg
+map_ao textures/3056032328484951_mig_21_pfm_interior_n_ao.jpg
+
+newmtl 24e15583-5e98-4e78-82bb-4e5a9194f16a
+Kd 1.000 1.000 1.000
+Ks 0.176 0.176 0.176
+Ns 30
+Ke 0.000 0.000 0.000
+map_Kd textures/3056032328484951_mig_21_pfm_seat_c.jpg
+map_Ks textures/3056032328484951_mig_21_pfm_seat_n_s.jpg
+map_normal textures/3056032328484951_mig_21_pfm_seat_n_n.jpg
+map_ao textures/3056032328484951_mig_21_pfm_seat_n_ao.jpg
+
+newmtl 7253d6de-c8dd-49cc-b3f4-544b681d5533
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.1
+
+newmtl df18fdd7-7909-4d14-93f6-2aaa1c1f2830
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+
+newmtl fe74f99e-57e6-4049-89d1-b7520e0ef81c
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+
+newmtl f6510602-4c16-4707-802b-6dc52d9845d4
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+
+newmtl 05ac9b4c-6d15-43e7-a1a2-96da3cb0cf23
+Kd 0.000 0.000 0.000
+Ks 0.000 0.000 0.000
+Ns 255
+Ke 0.000 0.000 0.000
+d 0.7
+
