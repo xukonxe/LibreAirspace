@@ -1,3 +1,11 @@
+/*
+ * The Libre Airspace Mod System
+ *  by TKTek
+ * Copyright © 2024 TKTek <TGJek@qq.com>, All rights reserved.
+ * Licensed under the MIT License, see the
+ * LICENSE-MIT-X11 in the root directory of the software
+ * distribution for more information.
+ */
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -11,7 +19,7 @@ using WTRev.TKTLib.Modding.InfoCls;
 
 namespace WTRev.TKTLib.Modding.CSC {
 	/// <summary>
-	/// <para>War Thunder : Revolution C# Compiler</para>
+	/// <para>WT : Revolution C# Compiler</para>
 	/// <para>一个简易C#编译器，Roslyn的前端</para>
 	/// </summary>
 	internal sealed class WTRCSC {
