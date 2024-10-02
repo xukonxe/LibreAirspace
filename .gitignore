@@ -46,7 +46,6 @@ ExportedObj
 *.mdb.meta
 sysinfo.txt
 *.apk
-*.unitypackage
 .collabignore
 crashlytics-build.properties
 **/Assets/AddressableAssetsData/*/*.bin*
