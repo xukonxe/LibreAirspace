@@ -1,3 +1,11 @@
+/*
+ * The Libre Airspace Mod System
+ *  by TKTek
+ * Copyright © 2024 TKTek <TGJek@qq.com>, All rights reserved.
+ * Licensed under the MIT License, see the
+ * LICENSE-MIT-X11 in the root directory of the software
+ * distribution for more information.
+ */
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;

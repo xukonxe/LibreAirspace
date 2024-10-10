@@ -14,3 +14,9 @@
 ## 赞助
 如果喜欢我的项目，请赞助我一杯蜜桃四季春吧~
 爱发电 https://ifdian.net/
+
+## 来自这个项目的一个贡献者TKTek(TGJek@qq.com)的告示:
+本仓库使用git lfs，请克隆仓库后使用git lfs下载(命令: git lfs fetch)由git lfs管理的大文件。
+### 关于LICENSING？
+本游戏的授权协议暂时未定。。。
+但是仓库内确认由我创作且版权归我(TKTek)的文件，计算机程序以MIT X11协议授权，各类其它的资产文件以CC-BY 4.0授权。
