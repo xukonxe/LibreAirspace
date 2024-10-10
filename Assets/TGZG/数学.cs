@@ -28,5 +28,10 @@ namespace TGZG {
         public static Quaternion ToQuaternion(this Vector4 v) {
             return new Quaternion(v.x, v.y, v.z, v.w);
         }
+        public static Vector2 To双轴角度(this Vector3 本地目标点) {
+            var Y轴角度 = Vector3.Angle(new Vector3(0, 本地目标点.y, 本地目标点.z), Vector3.forward) * Mathf.Sign(本地目标点.y);
+            var X轴角度 = Vector3.Angle(new Vector3(本地目标点.x, 0, 本地目标点.z), Vector3.forward) * Mathf.Sign(本地目标点.x);
+            return new Vector2(X轴角度, Y轴角度);
+        }
     }
 }

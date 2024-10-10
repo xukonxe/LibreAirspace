@@ -92,6 +92,7 @@ namespace 战雷革命 {
     }
     public struct 击伤信息 {
         public string 攻击者;
+        public string 被攻者;
         public float 伤害;
         public 部位 部位;
     }

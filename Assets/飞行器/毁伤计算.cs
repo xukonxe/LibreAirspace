@@ -31,7 +31,7 @@ public class 毁伤计算 : MonoBehaviour {
     public float 垂尾碰撞体承载值 = 10000;
 
     public Dictionary<部位, Func<float, bool>> 碰撞控制 = new();
-    public Action<string, 部位, float, bool> 被击中;
+    public Action<string, string, 部位, float, bool> 被击中;
     [NonSerialized]
     public bool 自动损坏 = true;
 
@@ -130,7 +130,7 @@ public class 毁伤计算 : MonoBehaviour {
             if (子弹体 != null) {
                 //被子弹击中，激活被击中事件，返回攻击者名称
                 //被子弹击中，由服务器决定是否损坏，因此损坏参数一直为false
-                被击中?.Invoke(子弹体.来源.父飞机.name, 部位, 强度, false);
+                被击中?.Invoke(子弹体.来源.父飞机.name, gameObject.name, 部位, 强度, false);
             } else {
                 //被其他物体击中，激活碰撞控制事件
                 if (自动损坏) {//其他玩家不自动损坏，由服务器控制
@@ -149,7 +149,7 @@ public class 毁伤计算 : MonoBehaviour {
         if (!碰撞控制.ContainsKey(击伤信息.部位)) return;
         if (断裂控制器.断裂状态.Contains(击伤信息.部位)) return;
         var 损坏 = 碰撞控制[击伤信息.部位].Invoke(击伤信息.伤害);
-        被击中?.Invoke(击伤信息.攻击者, 击伤信息.部位, 击伤信息.伤害, 损坏);
+        被击中?.Invoke(击伤信息.攻击者, gameObject.name, 击伤信息.部位, 击伤信息.伤害, 损坏);
     }
     public void 伤害(部位 部位, float 强度) {
         伤害(new 击伤信息 { 部位 = 部位, 伤害 = 强度, 攻击者 = "" });

@@ -251,7 +251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827867885370510599, guid: 50560c279863efd4c935c7c36256043c, type: 3}
       propertyPath: "\u7248\u672C"
-      value: v0.13
+      value: v0.14
       objectReference: {fileID: 0}
     - target: {fileID: 827867885370510599, guid: 50560c279863efd4c935c7c36256043c, type: 3}
       propertyPath: "\u53D1\u5E03\u65E5\u671F"
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "V0.13 <color=red>\u6B63\u5F0F\u7248\u524D</color>"
+  m_text: "V0.14 <color=red>\u6B63\u5F0F\u7248</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce817cebcdaf054480122787f99f6b5, type: 2}
   m_sharedMaterial: {fileID: -194235250564073334, guid: 9ce817cebcdaf054480122787f99f6b5, type: 2}

@@ -31,9 +31,12 @@ public class 油量管理器 : MonoBehaviour {
     }
     public (TimeSpan 底油时间, TimeSpan 满油时间) 获取可用油量() => (底油时间, 满油时间);
     public void 设置油量(TimeSpan 目标) {
-        if (!(目标 > 底油时间 && 目标 < 满油时间))
-            throw new Exception($"油量超出范围{底油时间:hh:mm:ss}-{满油时间:hh:mm:ss}");
+        if (目标 < 底油时间 && 目标 > 满油时间)
+            throw new Exception($"油量超出范围{底油时间}~{满油时间}");
         var 目标比例 = (满油时间 - 目标) / (满油时间 - 底油时间);
         当前油量 = 满油油质量 * (float)目标比例;
+    }
+    public TimeSpan 获取当前油量() {
+        return TimeSpan.FromSeconds(当前油量 / 每秒消耗质量);
     }
 }

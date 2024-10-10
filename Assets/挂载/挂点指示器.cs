@@ -4,6 +4,7 @@ using UnityEngine;
 using static TGZG.公共空间;
 using static 战雷革命.公共空间;
 using 战雷革命;
+using System;
 
 public class 挂点指示器 : MonoBehaviour {
     public Rigidbody 父物体;

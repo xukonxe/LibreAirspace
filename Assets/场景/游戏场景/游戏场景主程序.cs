@@ -23,15 +23,18 @@ namespace 战雷革命 {
             同步器.世界数据 = 数据.p;
             var 毁伤计算 = 飞行器.GetComponent<毁伤计算>();
             毁伤计算.自动损坏 = false;
-            毁伤计算.被击中 += (攻击者, 部位, 伤害值, 损坏) => {
-                //当攻击者为主视角玩家时，将伤害值发送至服务器
+            毁伤计算.被击中 += (攻击者, 被击者, 部位, 伤害值, 损坏) => {
+                //当攻击者为主视角玩家时，将伤害值发送至服务
                 if (攻击者 != 玩家数据.n) return;
                 var A = new 击伤信息();
-                A.攻击者 = 飞行器.name;
+                A.攻击者 = 攻击者;
+                A.被攻者 = 被击者;
                 A.部位 = 部位;
                 A.伤害 = 伤害值;
                 信道_游戏.击伤(A);
             };
+            var 油量管理器 = 飞行器.GetComponent<油量管理器>();
+            油量管理器.设置油量(数据.u.油量);
             return 飞行器;
         }
         public static GameObject 加载玩家飞行器(玩家游玩数据 玩家) {
@@ -41,13 +44,21 @@ namespace 战雷革命 {
             同步器.登录数据 = 玩家.u;
             同步器.世界数据 = 玩家.p;
             var 毁伤计算 = 飞行器.GetComponent<毁伤计算>();
-            毁伤计算.被击中 += (攻击者, 部位, 伤害值, 损坏) => {
-                if (攻击者 != "") return;//忽略非碰撞伤害
+            毁伤计算.被击中 += (攻击者, 被击者, 部位, 伤害值, 损坏) => {
+                //if (攻击者 == "") return;//忽略碰撞伤害
                 //上传损坏
+
+                "损坏！".log();
                 if (损坏) {
+                    "上传损坏提示".log();
+                    $"攻击者：{攻击者}".log();
                     信道_游戏.上传损坏提示(攻击者, 部位);
                 }
             };
+            var 油量管理器 = 飞行器.GetComponent<油量管理器>();
+            油量管理器.设置油量(玩家.u.油量);
+            ///var 挂载管理器 = 飞行器.GetComponent<挂点指示器>();
+            //挂载管理器.设置挂载(玩家.u.挂载);
             return 飞行器;
         }
         public static GameObject 加载导弹(挂载类型 类型) {
@@ -114,12 +125,13 @@ namespace 战雷革命 {
     public class 飞行器管理器 {
         public string 名称;
         public 队伍 队伍;
-        public 载具类型 类型;
+        public 载具类型 类型 = 载具类型.无;
         public GameObject 飞行器;
         List<Stopwatch> 开枪计时器 = new();
         public List<玩家导弹管理器> 玩家导弹 = new();
         public event Action<飞行仪表数据> 当飞行仪表更新;
         public event Action<玩家游玩数据> 当物理更新;
+        public HashSet<部位> 损坏数据 => 飞行器.GetComponent<毁伤计算>().损坏数据;
         public 飞行数据显示器 仪表;
         public bool 主玩家 { get; private set; }
         public 导弹 当前选定导弹 { get; private set; }
@@ -150,11 +162,6 @@ namespace 战雷革命 {
         }
         void 初始化(玩家游玩数据 玩家, bool 主玩家) {
             名称 = 玩家.u.n;
-            if (主玩家) {
-                "主玩家飞行器加载！".log();
-            }else {
-                "其他玩家飞行器加载！".log();
-            }
             飞行器 = 主玩家 switch {
                 true => 加载玩家飞行器(玩家),
                 false => 加载其他玩家飞行器(玩家)
@@ -190,7 +197,7 @@ namespace 战雷革命 {
             foreach (var i in 机炮) {
                 var 指示器 = i.GetComponent<枪射指示器>();
                 if (开枪计时器.Count() < num + 1) 开枪计时器.Add(Stopwatch.StartNew());
-                if (本帧射击情况.Count <= num + 1) 本帧射击情况.Add(false);
+                if (本帧射击情况.Count < num + 1) 本帧射击情况.Add(false);
                 if (开枪计时器[num].ElapsedMilliseconds > (60 * 1000) / 指示器.每分射速) {
                     指示器.射击(飞行器.transform);
                     本帧射击情况[num] = true;
@@ -275,13 +282,13 @@ namespace 战雷革命 {
                 玩家发射的导弹.Add(导弹数据);
             }
             var 数据 = new 玩家游玩数据() {
-                u = 玩家同步器.登录数据,
+                u = 获取玩家信息(),
                 p = 玩家同步器.世界数据,
                 射 = 本帧射击情况.Select(t => t ? 1 : 0).ToArray(),
                 msl = 玩家发射的导弹,
                 损坏 = 毁伤情况.损坏数据,
             };
-            本帧射击情况.Clear();
+            本帧射击情况 = 本帧射击情况.Select(t => t = false).ToList();
             return 数据;
         }
         public 玩家小地图信息 获取地图信息(bool 主玩家 = false) {
@@ -291,6 +298,12 @@ namespace 战雷革命 {
             信息.旋转 = -飞行器.transform.rotation.eulerAngles.y;
             信息.队伍 = 队伍;
             信息.载具 = 类型;
+            return 信息;
+        }
+        public 玩家进入数据 获取玩家信息() {
+            玩家进入数据 信息 = 飞行器.GetComponent<飞行数据同步>().登录数据;
+            信息.tm = 队伍;
+            信息.油量 = 飞行器.GetComponent<油量管理器>().获取当前油量();
             return 信息;
         }
         public void Destroy() {
@@ -423,16 +436,16 @@ namespace 战雷革命 {
                 });
                 return null;
             };
-            信道_游戏.OnRead["同步重生"] = t => {
-                var 同步玩家 = t["玩家"].JsonToCS<玩家游玩数据>();
-                //删除本地飞行器，自动重新加载心跳包中的飞行器
-                主线程(() => {
-                    var 飞行器 = 其他玩家飞行器.FirstOrDefault(t => t.名称 == 同步玩家.u.n);
-                    飞行器.Destroy();
-                    飞行器 = new 飞行器管理器(同步玩家, 当前地图);
-                });
-                return null;
-            };
+            //信道_游戏.OnRead["同步重生"] = t => {
+            //    var 同步玩家 = t["玩家"].JsonToCS<玩家游玩数据>();
+            //    //删除本地飞行器，自动重新加载心跳包中的飞行器
+            //    主线程(() => {
+            //        var 飞行器 = 其他玩家飞行器.FirstOrDefault(t => t.名称 == 同步玩家.u.n);
+            //        飞行器.Destroy();
+            //        飞行器 = new 飞行器管理器(同步玩家, 当前地图);
+            //    });
+            //    return null;
+            //};
             //信道_游戏.OnRead["同步损坏"] = t => {
             //    var 所属玩家 = t["玩家"];
             //    var 损坏数据 = t["数据"].JsonToCS<HashSet<部位>>();
@@ -536,6 +549,22 @@ namespace 战雷革命 {
                             其他玩家飞行器.Add(此);
                         };
                     }
+                    //如果本地飞行器类型不同，则销毁本地飞行器，创建新飞行器
+                    if (此.类型 != 此玩家.u.tp && 此.类型 != 载具类型.无) {
+                        重生();
+                    }
+                    //如果本地损坏比服务器多，那么销毁并创建新飞行器
+                    if (此.损坏数据.Count > 此玩家.损坏.Count) {
+                        重生();
+                    }
+                    void 重生(){
+                        此.Destroy();
+                        此 = new(此玩家, false);
+                        列表修改事件 += () => {
+                            其他玩家飞行器.Add(此);
+                        };
+                    }
+                    此.队伍 = 此玩家.u.tm;
                     此.同步位置(此玩家.p);
                     此.损坏(此玩家.损坏);
                     此.射击控制(此玩家.射);
@@ -613,7 +642,7 @@ namespace 战雷革命 {
         public void UI更新() {
             导弹预热环?.刷新();
         }
-        public void 上传玩家数据() {
+        public void 玩家数据更新() {
             if (玩家飞行器 is null) return;
             //机炮
             if (Input.GetAxis("Fire1") > 0)
@@ -658,14 +687,23 @@ namespace 战雷革命 {
             if (玩家飞行器 != null) 玩家飞行器.飞行器.GetComponent<摄像机跟随1>().暂停视角控制 = false;
         }
         public void 进入游戏或重生(玩家进入数据 玩家) {
+            //bool 重生 = 玩家飞行器 != null;
             玩家飞行器?.Destroy();
             玩家飞行器 = null;
             玩家飞行器 = new 飞行器管理器(玩家, 当前地图);
             玩家飞行器.注册仪表(界面切换器.悬浮.飞行数据显示);
             玩家飞行器.当物理更新 += t => {
                 信道_游戏.发送数据(t);
+                //var A = new 击伤信息();
+                //A.攻击者 = "沈伊利1";
+                //A.部位 = 部位.身;
+                //A.伤害 = 1000;
+                //信道_游戏.击伤(A);
             };
             界面切换器.游戏界面();
+            //if (重生) {
+            //    信道_游戏.发送重生(玩家);
+            //}
         }
         public void 退出房间() {
             信道_游戏.清理事件();
@@ -900,7 +938,7 @@ namespace 战雷革命 {
         }
         //固定时间调用，用于数据同步
         void FixedUpdate() {
-            当前模式.上传玩家数据();
+            当前模式.玩家数据更新();
             当前模式.数据更新();
         }
     }

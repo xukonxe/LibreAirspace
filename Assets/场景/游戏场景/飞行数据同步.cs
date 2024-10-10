@@ -21,6 +21,7 @@ namespace 战雷革命 {
         }
     }
     public class 飞行数据同步 : MonoBehaviour {
+        队伍 队伍;
         载具类型 载具类型;
         GameObject 玩家名称显示;
         bool 初始化;

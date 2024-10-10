@@ -4238,8 +4238,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1732124586}
   m_HandleRect: {fileID: 1732124585}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.7897803
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4643,8 +4643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u5F53\u524D <color=green>V0.13-Beta</color> \u6B63\u5F0F\u7248\n2024.10.5\u65E5\u505C\u6B62\u672C\u7248\u672C\u6D4B\u8BD5\n\n\u66F4\u65B0\u65E5\u5FD7\uFF1A\n1.\u91CD\u5927\u66F4\u65B0
-    <color=red>\u6B63\u5F0F\u7248</color>\n2.\u6DFB\u52A0\u8BA1\u5206\u677F\uFF08Tab\uFF09\u3001\u5C0F\u5730\u56FE\uFF08M\uFF09\u3001\u83DC\u5355\uFF08Esc\uFF09\u3002\n3.\u5927\u5E45\u4FEE\u6539\u6E38\u73A9\u903B\u8F91"
+  m_text: "\u5F53\u524D <color=green>V0.14</color> \u6B63\u5F0F\u7248\n2024.10.7\u65E5\u505C\u6B62\u672C\u7248\u672C\u6D4B\u8BD5\n\n\u66F4\u65B0\u65E5\u5FD7\uFF1A\n1.\u51FB\u4F24\u548C\u51FB\u6740\u63D0\u793A\u4FEE\u590D\r\n2.\u5C0F\u5730\u56FE\u663E\u793A\u4ED6\u4EBA\u4F4D\u7F6E\r\n3.\u91CD\u751F\u65F6\u6CA1\u6709\u6062\u590D\u635F\u574F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce817cebcdaf054480122787f99f6b5, type: 2}
   m_sharedMaterial: {fileID: -194235250564073334, guid: 9ce817cebcdaf054480122787f99f6b5, type: 2}

@@ -15521,7 +15521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "xxxx  \u5DF2\u6467\u6BC1 KD+1"
+  m_text: " \u5DF2\u6467\u6BC1 \u6C88\u4F0A\u5229"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9ce817cebcdaf054480122787f99f6b5, type: 2}
   m_sharedMaterial: {fileID: -194235250564073334, guid: 9ce817cebcdaf054480122787f99f6b5, type: 2}

@@ -44,7 +44,7 @@ public class 载具出生点 : MonoBehaviour {
         Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(宽 / 2, 高 / 2, 长 / 2), transform.rotation);
         区域内有载具 = false;
         foreach (Collider collider in colliders) {
-            collider.gameObject.name.log();
+            //collider.gameObject.name.log();
             区域内有载具 = true;
             break;
         }
