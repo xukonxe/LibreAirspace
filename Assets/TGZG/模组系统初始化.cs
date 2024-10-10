@@ -13,12 +13,12 @@ using static 战雷革命.公共空间;
 namespace 战雷革命 {
 	public static partial class 公共空间 { 
 		public static void 模组系统初始化() {
-			模组管理器类 = new ModManager(isServerSide: false);
+			模组管理器类 = new ModManager();
 			加载所有模组();
 		}
 
 		private static void 加载所有模组() {
-			DirectoryInfo _ModDirectory = new DirectoryInfo(Path.Join(Application.dataPath, "Mod"));
+			DirectoryInfo _ModDirectory = new DirectoryInfo(Path.Join(Application.persistentDataPath, "Mod"));
 			if (!_ModDirectory.Exists)
 				return;
 			IEnumerable<FileSystemInfo> _FSObjInModDirectory = _ModDirectory.EnumerateFileSystemInfos("*", SearchOption.TopDirectoryOnly);

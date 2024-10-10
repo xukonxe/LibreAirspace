@@ -24,10 +24,10 @@ namespace 战雷革命 {
         载具类型 载具类型;
         GameObject 玩家名称显示;
         bool 初始化;
-        public 玩家进入数据 登录数据 {
+        public 玩家登录数据 登录数据 {
             get {
                 if (!初始化) throw new InvalidOperationException("请先调用初始化名称UI方法");
-                return new 玩家进入数据() {
+                return new 玩家登录数据() {
                     n = gameObject.name,
                     tp = 载具类型
                 };
@@ -68,7 +68,6 @@ namespace 战雷革命 {
             初始化 = true;
             玩家名称显示 = Instantiate(加载资源<GameObject>("Assets/场景/游戏场景/玩家名称.prefab"));
             玩家名称显示.SetParent(GameObject.Find("Canvas"));
-            玩家名称显示.transform.SetAsFirstSibling();
         }
         void Update() {
             玩家名称显示.映射到世界物体(gameObject, 屏幕偏移: new(0, 30));

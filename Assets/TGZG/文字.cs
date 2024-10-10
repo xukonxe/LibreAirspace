@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TGZG.公共空间;
-
+using XLua;
 using UnityEngine.SceneManagement;
 
 /// 此文件需要引用Tencent.Xlua插件的54-v2.2.16版本

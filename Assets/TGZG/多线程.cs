@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TGZG.公共空间;
-
+using XLua;
 using System;
 using System.Threading;
 
@@ -11,12 +11,7 @@ namespace TGZG {
     public static partial class 公共空间 {
         public static AppThread MainThread;
         public static void 初始化主线程(GameObject 物体 = null) {
-            //遍历所有
-            if (物体 == null) 物体 = GameObject.FindWithTag("主程序附加于此");
-            if (物体 == null) { 
-                物体 = new GameObject("自动创建的主程序物体"); 
-                物体.tag = "主程序附加于此";
-            }
+            if (物体 == null) 物体 = GameObject.Find("Main");
             if (MainThread == null) MainThread = 物体.AddComponent<AppThread>();
         }
         public static void OnMainThread(Action Y) {

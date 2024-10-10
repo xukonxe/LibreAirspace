@@ -8,7 +8,6 @@ using kcp2k;
 using System.Text;
 using System.Linq;
 using UnityEngine;
-using System.Diagnostics;
 
 namespace TGZG {
     public abstract class 网络信道类_Tcp {
@@ -49,7 +48,7 @@ namespace TGZG {
                 });
             }
             断开();
-            $"正在以版本[{版本}]尝试连接{服务端IP}".Log();
+            $"正在连接{服务端IP}".Log();
             游戏端 = new TcpClient(服务端IP, 版本);
             游戏端.OnConnect = () => {
                 主线程(() => {
@@ -130,37 +129,23 @@ namespace TGZG {
                 return null;
             };
             OnData += (数据, 频道) => {
-
-
                 //处理空数据包
                 if (数据.Array == null) {
-                    $"[KCP] 收到空数据包，频道：{频道}".logerror();
-                    //Send(("标题", "数据错误"), ("内容", "数据内容为空"));
+                    Send(("标题", "数据错误"), ("内容", "数据内容为空"));
                     return;
                 }
                 //转码数据包
                 string 数据json = Encoding.UTF8.GetString(数据.Array, 数据.Offset, 数据.Count);
                 var 解析后 = 数据json.JsonToCS<Dictionary<string, string>>();
-
-
                 //处理无标题数据包
                 if (!解析后.ContainsKey("标题")) {
-                    $"[KCP] 收到无标题数据包，频道：{频道}".logerror();
-                    //Send(("标题", "数据错误"), ("内容", "数据不含标题"));
+                    Send(("标题", "数据错误"), ("内容", "数据不含标题"));
                     return;
                 }
                 var 标题 = 解析后["标题"];
-
-                //处理动态消息，匹配成功后数据流向第二方向，否则进入第一方向 
-                //第二数据流向：动态消息处理
-                if (动态消息处理器.匹配(解析后))
-                    return;
-                //第一数据流向：固定消息处理
-
                 //处理异常标题数据包
                 if (!OnRead.ContainsKey(标题)) {
-                    $"[KCP] 收到未知数据标题，频道：{频道}，标题：{标题}".logerror();
-                    //Send(("标题", "数据错误"), ("内容", $"未知数据标题，请检查游戏版本。当前服务器版本：{版本}。发来的标题：{标题}"));
+                    Send(("标题", "数据错误"), ("内容", $"未知数据标题，请检查游戏版本。当前服务器版本：{版本}。发来的标题：{标题}"));
                     return;
                 }
                 //进入数据处理流程并返回对应消息
@@ -168,7 +153,7 @@ namespace TGZG {
                 if (返回消息 != null) Send(返回消息);
             };
             OnError += (错误码, 错误信息) => {
-                UnityEngine.Debug.LogError($"Kcp错误：{错误信息}");
+                Debug.LogError($"Kcp错误：{错误信息}");
                 //主线程(() => {
                 //    throw new Exception($"Kcp错误：{错误信息}");
                 //});
@@ -193,7 +178,6 @@ namespace TGZG {
         }
         public void Tick() {
             游戏端?.Tick();
-            动态消息处理器.Tick();
         }
         public void 断开() {
             if (游戏端 != null) {
@@ -213,37 +197,6 @@ namespace TGZG {
                 发送数据[数据项.Item1] = 数据项.Item2;
             }
             游戏端.Send(发送数据.ToJson(false).ToBytes(), KcpChannel.Reliable);
-        }
-        public void WaitFor(string 消息标题, int 超时时间, Action<Dictionary<string, string>> 回调) {
-            new 动态消息处理器(消息标题, 超时时间, 回调);
-        }
-        private class 动态消息处理器 {
-            public static List<动态消息处理器> 等待列表 = new();
-            public static void Tick() {
-                等待列表.RemoveAll(t => t.超时);
-            }
-            public static bool 匹配(Dictionary<string, string> 消息) {
-                var 等待消息 = 等待列表.FirstOrDefault(t => t.等待标题 == 消息["标题"]);
-                if (等待消息 == null) return false;
-                等待消息.回调?.Invoke(消息);
-                等待列表.Remove(等待消息);
-                return true;
-            }
-
-            public string 等待标题;
-            public int 超时时间;
-            public Action<Dictionary<string, string>> 回调;
-            public bool 超时 => 计时器.ElapsedMilliseconds > 超时时间 * 1000;
-
-            private Stopwatch 计时器;
-            public 动态消息处理器(string 等待标题, int 超时时间, Action<Dictionary<string, string>> 回调) {
-                this.等待标题 = 等待标题;
-                this.超时时间 = 超时时间;
-                this.回调 = 回调;
-                计时器 = new Stopwatch();
-                计时器.Start();
-                等待列表.Add(this);
-            }
         }
     }
 }

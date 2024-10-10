@@ -47,7 +47,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.右内] = (强度) => {
             碰撞体动量[右翼内沿碰撞体] += 强度;
             if (碰撞体动量[右翼内沿碰撞体] > 右翼内沿碰撞体承载值) {
-                断裂控制器.断裂(部位.右内);
+                断裂控制器.右翼内沿断裂();
                 return true;
             }
             return false;
@@ -55,7 +55,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.左内] = (强度) => {
             碰撞体动量[左翼内沿碰撞体] += 强度;
             if (碰撞体动量[左翼内沿碰撞体] > 左翼内沿碰撞体承载值) {
-                断裂控制器.断裂(部位.左内);
+                断裂控制器.左翼内沿断裂();
                 return true;
             }
             return false;
@@ -63,7 +63,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.右外] = (强度) => {
             碰撞体动量[右翼外沿碰撞体] += 强度;
             if (碰撞体动量[右翼外沿碰撞体] > 右翼外沿碰撞体承载值) {
-                断裂控制器.断裂(部位.右外);
+                断裂控制器.右翼外沿断裂();
                 return true;
             }
             return false;
@@ -71,7 +71,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.左外] = (强度) => {
             碰撞体动量[左翼外沿碰撞体] += 强度;
             if (碰撞体动量[左翼外沿碰撞体] > 左翼外沿碰撞体承载值) {
-                断裂控制器.断裂(部位.左外);
+                断裂控制器.左翼外沿断裂();
                 return true;
             }
             return false;
@@ -79,7 +79,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.左尾] = (强度) => {
             碰撞体动量[左尾翼碰撞体] += 强度;
             if (碰撞体动量[左尾翼碰撞体] > 左尾翼碰撞体承载值) {
-                断裂控制器.断裂(部位.左尾);
+                断裂控制器.左尾翼断裂();
                 return true;
             }
             return false;
@@ -87,7 +87,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.右尾] = (强度) => {
             碰撞体动量[右尾翼碰撞体] += 强度;
             if (碰撞体动量[右尾翼碰撞体] > 右尾翼碰撞体承载值) {
-                断裂控制器.断裂(部位.右尾);
+                断裂控制器.右尾翼断裂();
                 return true;
             }
             return false;
@@ -95,7 +95,7 @@ public class 毁伤计算 : MonoBehaviour {
         碰撞控制[部位.垂] = (强度) => {
             碰撞体动量[垂尾碰撞体] += 强度;
             if (碰撞体动量[垂尾碰撞体] > 垂尾碰撞体承载值) {
-                断裂控制器.断裂(部位.垂);
+                断裂控制器.垂尾断裂();
                 return true;
             }
             return false;
@@ -104,7 +104,7 @@ public class 毁伤计算 : MonoBehaviour {
             当前承受 += 强度;
             if (当前承受 > 动量承载值) {
                 //全部断裂
-                断裂控制器.断裂(部位.身);
+                断裂控制器.全断裂();
                 return true;
             }
             return false;
@@ -139,19 +139,14 @@ public class 毁伤计算 : MonoBehaviour {
             }
         }
     }
-    public HashSet<部位> 损坏数据 => 断裂控制器.断裂状态;
     public void 损坏(HashSet<部位> 数据) {
         foreach (var 部位 in 数据) {
-            伤害(部位, 1000000);
+            碰撞控制[部位]?.Invoke(100000000);
         }
     }
-    public void 伤害(击伤信息 击伤信息) {
-        if (!碰撞控制.ContainsKey(击伤信息.部位)) return;
-        if (断裂控制器.断裂状态.Contains(击伤信息.部位)) return;
-        var 损坏 = 碰撞控制[击伤信息.部位].Invoke(击伤信息.伤害);
-        被击中?.Invoke(击伤信息.攻击者, 击伤信息.部位, 击伤信息.伤害, 损坏);
-    }
     public void 伤害(部位 部位, float 强度) {
-        伤害(new 击伤信息 { 部位 = 部位, 伤害 = 强度, 攻击者 = "" });
+        if (!碰撞控制.ContainsKey(部位)) return;
+        var 损坏 = 碰撞控制[部位].Invoke(强度);
+        被击中?.Invoke("", 部位, 强度, 损坏);
     }
 }

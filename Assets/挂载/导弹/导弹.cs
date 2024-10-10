@@ -7,7 +7,7 @@ using 战雷革命;
 using System;
 
 public class 导弹 : MonoBehaviour {
-    public 挂载类型 类型;
+    public 导弹类型 类型;
     public float 阻力系数;
     public List<Collider> 自身碰撞箱 = new();
     [HideInInspector]

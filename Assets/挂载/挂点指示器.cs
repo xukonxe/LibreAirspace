@@ -8,7 +8,6 @@ using 战雷革命;
 public class 挂点指示器 : MonoBehaviour {
     public Rigidbody 父物体;
     public GameObject 挂载物体;
-    public List<挂载类型> 允许挂载;
     float 长 = 5f; // 箭头大小
     float 头长 = 0.2f; // 箭头大小
 
@@ -23,7 +22,7 @@ public class 挂点指示器 : MonoBehaviour {
         }
     }
     private void FixedUpdate() {
-
+       
     }
     void OnDrawGizmosSelected() {
         // 计算箭头的方向

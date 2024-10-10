@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TGZG.公共空间;
-
+using XLua;
 using UnityEngine.SceneManagement;
 
 namespace TGZG {

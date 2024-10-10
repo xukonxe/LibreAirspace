@@ -2811,7 +2811,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u7236\u7269\u4F53": {fileID: 3303626037318943722}
   "\u6302\u8F7D\u7269\u4F53": {fileID: 2179048043958901114}
-  "\u5141\u8BB8\u6302\u8F7D": 
 --- !u!1 &1114675368366747267
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,7 +4994,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u7236\u7269\u4F53": {fileID: 3303626037318943722}
   "\u6302\u8F7D\u7269\u4F53": {fileID: 8147767275586046887}
-  "\u5141\u8BB8\u6302\u8F7D": 
 --- !u!1 &2182697462740614983
 GameObject:
   m_ObjectHideFlags: 0
@@ -5471,7 +5469,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u7236\u7269\u4F53": {fileID: 3303626037318943722}
   "\u6302\u8F7D\u7269\u4F53": {fileID: 4774315370673589001}
-  "\u5141\u8BB8\u6302\u8F7D": 
 --- !u!1 &2522192024374545284
 GameObject:
   m_ObjectHideFlags: 0
@@ -6152,7 +6149,6 @@ GameObject:
   - component: {fileID: 3294633291817631459}
   - component: {fileID: 6735072205222507477}
   - component: {fileID: 776723509593620981}
-  - component: {fileID: 2148847464933139905}
   m_Layer: 0
   m_Name: F4C
   m_TagString: Untagged
@@ -6222,7 +6218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 170000
-  mass: 0
   aerodynamicSurfaces:
   - {fileID: 6493329487514008182}
   - {fileID: 7978476882317469143}
@@ -6274,7 +6269,6 @@ MonoBehaviour:
   "\u504F\u822A": 0
   "\u6EDA\u8F6C": 0
   "\u895F\u7FFC": 0
-  "\u901F\u5EA6": 0
   "\u895F\u7FFC\u5F00\u542F\u503C": 0.15
   "\u8282\u6D41\u9600": 0
   "\u5239\u8F66": 0
@@ -6311,6 +6305,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "\u6682\u505C\u89C6\u89D2\u63A7\u5236": 0
+  USE_mouse: 1
+  useRollAngleTan2: 1
+  UsePreForward: 0
+  UseRbRate: 0
+  UseQuaternionRate: 1
+  controlDirectly: 0
+  logPitchPid: 0
+  logRollPid: 0
+  logYawPid: 0
+  logRbRate: 0
+  logRateLocal: 0
   "\u4E0A\u504F\u79FB": 5
   "\u540E\u504F\u79FB": 8
   "\u5149\u6807\u6307\u793A\u7269\u4F53": {fileID: 0}
@@ -6323,6 +6328,52 @@ MonoBehaviour:
   "\u8DDF\u968F\u901F\u5EA6": 6
   "\u4FEF\u4EF0\u4FEE\u6B63\u4E58\u6570": 2
   "\u504F\u822A\u4FEE\u6B63\u4E58\u6570": 12
+  pitchPre: 0.1
+  yawPre: 0.1
+  rollPre: 0.1
+  filter: 1
+  pitchExp: 6
+  rollSwitch: 0.2
+  pitchInRollGain: 10
+  rotateAngleX: 0
+  rotateAngleY: 0
+  rotateAngleZ: 0
+  ratePID_PP: 0.015
+  ratePID_PI: 0.008
+  ratePID_PD: 0.01
+  ratePID_RP: 0.002
+  ratePID_RI: 0.001
+  ratePID_RD: 0.001
+  ratePID_YP: 0.02
+  ratePID_YI: 0.01
+  ratePID_YD: 0.1
+  anglePID_PP: 1
+  anglePID_PI: 0
+  anglePID_PD: 0
+  anglePID_RP: 4
+  anglePID_RI: 0.1
+  anglePID_RD: 0.05
+  anglePID_YP: 5
+  anglePID_YI: 0
+  anglePID_YD: 0
+  attPID_PP: -500
+  attPID_PI: 0
+  attPID_PD: -100
+  attPID_RP: -200
+  attPID_RI: 0
+  attPID_RD: -50
+  attPID_REE: 0
+  attPID_RDD: 0
+  attPID_Range: 0.1
+  attPID_YP: 100
+  attPID_YI: 5
+  attPID_YD: 0
+  desire_rateP: 0
+  desire_rateR: 0
+  desire_rateY: 0
+  desire_attP: 2
+  desire_attR: -5
+  desire_attY: 0
   "\u89D2\u901F\u5EA6\u8BA1\u7B97\u6B21\u6570\u6BCF\u79D2": 20
   "\u4E34\u754C\u89D2\u5EA6": 5
   "\u5149\u6807\u8DDD\u79BB": 10000
@@ -6380,21 +6431,6 @@ MonoBehaviour:
   "\u5C3E\u8FFD\u5F3A\u5EA6": 5500
   "\u4FA7\u8FFD\u5F3A\u5EA6": 3500
   "\u5BF9\u5934\u5F3A\u5EA6": 500
---- !u!114 &2148847464933139905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2787028675438887965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fae396c6d3a21d34fbac2b2d305c3c9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "\u6EE1\u6CB9\u91CD\u91CF": 0
-  "\u7A7A\u6CB9\u91CD\u91CF": 0
-  "\u5F53\u524D\u6CB9\u91CF": 0
 --- !u!1 &2812707701832406819
 GameObject:
   m_ObjectHideFlags: 0
@@ -8366,7 +8402,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u7236\u7269\u4F53": {fileID: 3303626037318943722}
   "\u6302\u8F7D\u7269\u4F53": {fileID: 1362354189535179728}
-  "\u5141\u8BB8\u6302\u8F7D": 
 --- !u!1 &3707248480419430360
 GameObject:
   m_ObjectHideFlags: 0
@@ -10820,7 +10855,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u7236\u7269\u4F53": {fileID: 3303626037318943722}
   "\u6302\u8F7D\u7269\u4F53": {fileID: 5986793250941131993}
-  "\u5141\u8BB8\u6302\u8F7D": 
 --- !u!1 &4675660850081606544
 GameObject:
   m_ObjectHideFlags: 0
@@ -13027,7 +13061,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u7236\u7269\u4F53": {fileID: 3303626037318943722}
   "\u6302\u8F7D\u7269\u4F53": {fileID: 1177925569374966220}
-  "\u5141\u8BB8\u6302\u8F7D": 
 --- !u!1 &5890542204216408416
 GameObject:
   m_ObjectHideFlags: 0

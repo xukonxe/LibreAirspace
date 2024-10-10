@@ -33,22 +33,14 @@ namespace 战雷革命 {
         public string 房间版本;
         public int 每秒同步次数;
         public DateTime 房间创建时间;
-        public 模式类型 模式;
-        public List<载具类型> 可选载具;
-        public List<队伍> 可选队伍;
-    }
-    public enum 模式类型 {
-        休闲,
-        竞技,
-        自定义
     }
     //游戏通讯，每秒发送数十次。为了减低带宽压力，字段名尽和内容要可能短。
     public struct 玩家游玩数据 {
-        public 玩家进入数据 u;
+        public 玩家登录数据 u;
         public 玩家世界数据 p;
+        public 队伍 tm;
         public int[] 射;
         public List<导弹飞行数据> msl;
-        public HashSet<部位> 损坏;
         public void 三位保留() {
             //所有float只保留三位小数
             p.p = p.p.Select(t => (float)Math.Round(t, 3)).ToArray();
@@ -57,7 +49,7 @@ namespace 战雷革命 {
             p.r = p.r.Select(t => (float)Math.Round(t, 3)).ToArray();
             for (int i = 0; i < msl.Count; i++) {
                 var n = new 导弹飞行数据();
-                n.编号 = msl[i].编号;
+                n.i = msl[i].i;
                 n.tp = msl[i].tp;
                 n.p = msl[i].p.Select(t => (float)Math.Round(t, 3)).ToArray();
                 n.d = msl[i].d.Select(t => (float)Math.Round(t, 3)).ToArray();
@@ -68,15 +60,14 @@ namespace 战雷革命 {
         }
     }
     public struct 导弹飞行数据 {
-        public int 编号;
-        public 挂载类型 tp;
+        public int i;
+        public 导弹类型 tp;
         public float[] p;
         public float[] d;
         public float[] v;
         public float[] r;
     }
-    public enum 挂载类型 {
-        无,
+    public enum 导弹类型 {
         AIM9E,
     }
     public enum 部位 {
@@ -91,17 +82,13 @@ namespace 战雷革命 {
         垂,
     }
     public struct 击伤信息 {
-        public string 攻击者;
-        public float 伤害;
-        public 部位 部位;
+        public string ths;
+        public float dm;
+        public 部位 bp;
     }
-    public struct 玩家进入数据 {
+    public struct 玩家登录数据 {
         public string n;
         public 载具类型 tp;
-        public 队伍 tm;
-        public TimeSpan 油量;
-        public (string, string) 出生点;
-        public 挂载类型[] 挂载;
     }
     public struct 玩家世界数据 {
         public float[] p;
@@ -122,17 +109,5 @@ namespace 战雷革命 {
         蓝,
         红,
         系统
-    }
-    public struct 计分板数据 {
-        public string[] 列定义;
-        public List<object[]> 列数据;
-        public object[] 取行(int 行号) {
-            return 列数据[行号];
-        }
-        public object[] 取列(string 列名) {
-            var 列号 = Array.IndexOf(列定义, 列名);
-            if (列号 < 0) return null;
-            return 列数据.Select(t => t[列号]).ToArray();
-        }
     }
 }

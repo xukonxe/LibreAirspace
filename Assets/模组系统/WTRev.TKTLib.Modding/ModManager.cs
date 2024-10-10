@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.Configuration;
 using Microsoft.CodeAnalysis;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -48,12 +49,9 @@ namespace WTRev.TKTLib.Modding.ModManager {
 
 		private List<ModInfo> m_LoadedMods;
 
-		private bool m_IsServerSide;
-
-		public ModManager(bool isServerSide) {
+		public ModManager() {
 			this.m_LoadedMods = new List<ModInfo>(64);      //嗯，硬编码预分配内存什么的。。。
 			this.m_WTRCSC = new WTRCSC(GetAssemblyReference());
-			this.m_IsServerSide = isServerSide;
 
 			//这里做一下已加载程序集的日志。
 			StringBuilder _mesgSB = new StringBuilder(65535);
@@ -67,14 +65,14 @@ namespace WTRev.TKTLib.Modding.ModManager {
 					//Do nothing?
 				}
 			}
-			TGZG.公共空间.Log(_mesgSB.ToString());
+			UnityEngine.Debug.Log(_mesgSB.ToString());
 		}
 
 		//这个B获取程序集引用的程序，会导致在编辑器下面使用模组系统会编译脚本失败！
 		private IEnumerable<IEnumerable<byte>> GetAssemblyReference() {
-			//在Unity的环境下？
-#if TKTEK_DEVEL_MODSYSTEM_UNITY_MONO
 			return
+				//在Unity的环境下？
+#if TKTEK_DEVEL_MODSYSTEM_UNITY_MONO
 #if UNITY_EDITOR || UNITY_EDITOR_64 || UNITY_EDITOR_WIN
 				this.GetAssemblyReferenceUnityEditor();
 #elif UNITY_STANDALONE
@@ -84,21 +82,19 @@ namespace WTRev.TKTLib.Modding.ModManager {
 #else
 				null
 #endif
-				;
+				//如果是在.NET Core下面呢？
 #elif TKTEK_DEVEL_MODSYSTEM_DOTNET_CORE
-			//如果是在.NET Core下面呢？
-			foreach (Assembly _assembly in AppDomain.CurrentDomain.GetAssemblies()) {
-				string _assemblyLocation = null;
-				try {
-					_assemblyLocation = _assembly.Location;
-				} catch {
-					//Do nothing?
-				}
-				if (!string.IsNullOrWhiteSpace(_assemblyLocation)) {
-					yield return File.ReadAllBytes(_assemblyLocation);
-				}
-			}
+			Directory.GetFiles(Path.GetDirectoryName(typeof(object).Assembly.Location))
+				.Where(_filePath => Path.GetFileName(_filePath) switch {
+					"System.Private.CoreLib.dll" or "netstandard.dll" or "System.Console.dll" or "System.Runtime.dll" => true,
+					_ => false
+				})
+				.Concat(new string[] { @"D:\CodeNProject\TKTsWorks\WTRev.TKTLib\WTRev.TKTLib.Modding\bin\Debug\netstandard2.0\WTRev.TKTLib.Modding.dll" })
+				.Select(File.ReadAllBytes)
+#else
+				null
 #endif
+			;
 		}
 
 		//Hard-coded .NET assembly list!!
@@ -137,43 +133,37 @@ namespace WTRev.TKTLib.Modding.ModManager {
 					}
 				}
 			}
-			TGZG.公共空间.Log(_MesgBuilder.ToString());
+            UnityEngine.Debug.Log(_MesgBuilder.ToString());
         }
 
 		public IReadOnlyList<ModInfo> GetLoadedMods() => this.m_LoadedMods;
 
 		public ModOperateResult LoadMod(Stream modPackageByteStream) {
 			ZipArchive _zipArchive = null;
-			MemoryStream _modPackageByteStream_Mem = new MemoryStream(1024 * 1024 * 64 /*预分配64MB内存*/);
-			modPackageByteStream.CopyTo(_modPackageByteStream_Mem);
 			try {
 				//这里可能会卡住很长一段时间，这个方法应该被设计成是异步执行的。
-				_zipArchive = new ZipArchive(_modPackageByteStream_Mem, ZipArchiveMode.Read, true, Encoding.UTF8);
+				_zipArchive = new ZipArchive(modPackageByteStream, ZipArchiveMode.Read, true, Encoding.UTF8);
 			} catch (InvalidDataException) { 
 				return ModOperateResult.读取Zip归档失败;
 			}
-			(ModOperateResult, ModInfo) _ModPackageLoadResult = this.LoadModPackage(_zipArchive, false);
+			(ModOperateResult, ModInfo) _ModPackageLoadResult = this.LoadModPackage(_zipArchive);
 			if ((_ModPackageLoadResult.Item1 & ModOperateResult.失败) == 0 && null != _ModPackageLoadResult.Item2) {
-				//计算SHA512校验和
-				_modPackageByteStream_Mem.Position = 0;
-				_ModPackageLoadResult.Item2.m_ModPackSha512Sum = System.Security.Cryptography.SHA512.Create().ComputeHash(_modPackageByteStream_Mem);
 				//编译好脚本！
-				string _ScriptsToCompileAtThisSide = this.m_IsServerSide ?
-					ModFileTypeConstant.SCRIPT_CSHARP_SERVER_SIDE_ONLY : ModFileTypeConstant.SCRIPT_CSHARP_CLIENT_SIDE_ONLY;
 				(ModOperateResult, IEnumerable<Diagnostic>, byte[]) _CompileResult = this.m_WTRCSC.CompileScriptSet(
 					_ModPackageLoadResult.Item2.FileTable
-					.Where(_fileEntry => _fileEntry.Type == ModFileTypeConstant.SCRIPT_CSHARP ||
-						_fileEntry.Type == _ScriptsToCompileAtThisSide)
+					.Where(_fileEntry => _fileEntry.Type == ModFileTypeConstant.SCRIPT_CSHARP)
 					.Select(_fileEntry => Encoding.UTF8.GetString(_fileEntry.Content)));
 				//编译失败!
 				if ((_CompileResult.Item1 & ModOperateResult.失败) != 0) {
 					//输出编译诊断信息
+#if UNITY_EDITOR || UNITY_STANDALONE
 					StringBuilder _MesgSB = new StringBuilder(65535);
 					_MesgSB.AppendLine("Compiling for script assembly failed.");
 					foreach (Diagnostic _DiagInfo in _CompileResult.Item2) {
 						_MesgSB.AppendLine(_DiagInfo.ToString());
 					}
-					TGZG.公共空间.Log(_MesgSB.ToString());
+					UnityEngine.Debug.LogError(_MesgSB.ToString());
+#endif
 					return _CompileResult.Item1;
 				}
 				this.m_LoadedMods.Add(_ModPackageLoadResult.Item2);
@@ -195,9 +185,8 @@ namespace WTRev.TKTLib.Modding.ModManager {
 		/// 加载模组包（仅进行基础的模组实例对象创建和加载资产文件）
 		/// </summary>
 		/// <param name="modPackageZipArchive">模组包的Zip归档对象</param>
-		/// <param name="readMetadataOnly">是否仅读取模组包的元数据？</param>
 		/// <returns>成功则返回创建的模组实例对象，失败则返回空引用</returns>
-		public (ModOperateResult, ModInfo) LoadModPackage(ZipArchive modPackageZipArchive, bool readMetadataOnly) {
+		private (ModOperateResult, ModInfo) LoadModPackage(ZipArchive modPackageZipArchive) {
 			ModInfo _modInstance = null;
 			ModOperateResult _错误代码 = default;
 
@@ -206,9 +195,6 @@ namespace WTRev.TKTLib.Modding.ModManager {
 			Stream _metaDataFileStream = null;
 			StreamReader _metaDataFileStreamReader = null;
 			string _metadataFileContent = null;
-			if (null == _metaDataFile) {
-				return (ModOperateResult.没有元数据, null);
-			}
 			try {
 				//此处读取&解析元数据文档!
 				_metaDataFileStream = _metaDataFile.Open();
@@ -223,37 +209,32 @@ namespace WTRev.TKTLib.Modding.ModManager {
 				_metaDataFileStreamReader.Close();
 				_metaDataFileStream.Close();
 			}
-			if (readMetadataOnly) {
-				_错误代码 = ModOperateResult.成功;
-				return (_错误代码, _modInstance);
-			} else {
-				//在Zip归档中查找元数据中有记录的Zip归档文件项。。。
-				//此处加载模组包的模组需要的各个资产文件
-				List<ModFileInfo> _ModFileNotResolved = new List<ModFileInfo>(_modInstance.FileTable);          //嗯，硬编码预分配内存什么的。。。
-				foreach (ZipArchiveEntry _zipArEnt in modPackageZipArchive.Entries) {
-					ModFileInfo _modFileMatched = _ModFileNotResolved.FirstOrDefault(_modFileRequired => _modFileRequired.Path == _zipArEnt.FullName);
-					//如果这个块没有被执行到，那么模组需要的一个文件项就读取失败了！
-					if (null != _modFileMatched) {
-						using (Stream _zipArFileEntStream = _zipArEnt.Open()) {
-							byte[] _buffer = new byte[_zipArEnt.Length];
-							//靠，这样处理4GB以上的文件就会出问题了！
-							checked {
-								_zipArFileEntStream.Read(_buffer, 0, (int)_zipArEnt.Length);
-							}
-							_modFileMatched.Content = _buffer;
+			//在Zip归档中查找元数据中有记录的Zip归档文件项。。。
+			//此处加载模组包的模组需要的各个资产文件
+			List<ModFileInfo> _ModFileNotResolved = new List<ModFileInfo>(_modInstance.FileTable);          //嗯，硬编码预分配内存什么的。。。
+			foreach (ZipArchiveEntry _zipArEnt in modPackageZipArchive.Entries) {
+				ModFileInfo _modFileMatched = _ModFileNotResolved.FirstOrDefault(_modFileRequired => _modFileRequired.Path == _zipArEnt.FullName);
+				//如果这个块没有被执行到，那么模组需要的一个文件项就读取失败了！
+				if (null != _modFileMatched) {
+					using (Stream _zipArFileEntStream = _zipArEnt.Open()) {
+						byte[] _buffer = new byte[_zipArEnt.Length];
+						//靠，这样处理4GB以上的文件就会出问题了！
+						checked {
+							_zipArFileEntStream.Read(_buffer, 0, (int)_zipArEnt.Length);
 						}
-						_ModFileNotResolved.Remove(_modFileMatched);
+						_modFileMatched.Content = _buffer;
 					}
+					_ModFileNotResolved.Remove(_modFileMatched);
 				}
-				//如果，还是有没有被读取到的模组资产文件。。。
-				//那么应该有些文件读取失败了！
-				if (_ModFileNotResolved.Count != 0) {
-					_错误代码 = ModOperateResult.缺失资产文件;
-				}
-				_错误代码 = ModOperateResult.成功;
-				_modInstance.IsInstance = true;
-				return (_错误代码, _modInstance);
 			}
+			//如果，还是有没有被读取到的模组资产文件。。。
+			//那么应该有些文件读取失败了！
+			if (_ModFileNotResolved.Count != 0) {
+				_错误代码 = ModOperateResult.缺失资产文件;
+			}
+			_错误代码 = ModOperateResult.成功;
+			_modInstance.IsInstance = true;
+			return (_错误代码, _modInstance);
 		}
 	}
 }

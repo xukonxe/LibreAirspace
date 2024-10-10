@@ -11,8 +11,8 @@ using UnityEngine.UI;
 
 namespace 战雷革命 {
     public static partial class 公共空间 {
-        public static Dictionary<挂载类型, string> 导弹预设体 = new() {
-            { 挂载类型.AIM9E, "Assets/挂载/导弹/AIM9E/AIM-9E.prefab"}
+        public static Dictionary<导弹类型, string> 导弹预设体 = new() {
+            { 导弹类型.AIM9E, "Assets/挂载/导弹/AIM9E/AIM-9E.prefab"}
         };
         public static Vector3 坐标系转化(this Vector3 坐标, Vector3 原坐标系, Vector3 目标坐标系) {
             // 确保Z轴向量归一化
@@ -29,9 +29,6 @@ namespace 战雷革命 {
 
             // 应用变换
             return matrix.MultiplyPoint(坐标);
-        }
-        public static Sprite ToSprite(this Texture2D texture) {
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         }
     }
     public class 摄像机跟随1 : MonoBehaviour {
@@ -69,15 +66,6 @@ namespace 战雷革命 {
 
         public List<挂点指示器> 挂点 = new();
 
-        public void 隐藏光标() {
-            光标.SetActive(false);
-            准星.SetActive(false);
-        }
-        public void 显示光标() {
-            光标.SetActive(true);
-            准星.SetActive(true);
-        }
-
         protected void Start() {
             碰撞体 = GetComponent<Rigidbody>();
             //出生时，默认光标朝向为载具的朝向
@@ -92,8 +80,7 @@ namespace 战雷革命 {
             光标.transform.SetParent(GameObject.Find("Canvas").transform, false);
             光标.AddComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
             光标.AddComponent<CanvasRenderer>();
-            光标.AddComponent<Image>().color = new(255, 255, 255, 1);
-            光标.GetComponent<Image>().sprite = 加载资源<Texture2D>("Assets/素材/零碎图片素材/鼠标外环.png").ToSprite();
+            光标.AddComponent<Image>().color = new(255, 255, 255, 0.5f);
 
             //创建准星指示物体
             准星指示物体 = new GameObject("准星指示物体");
@@ -104,8 +91,7 @@ namespace 战雷革命 {
             准星.transform.SetParent(GameObject.Find("Canvas").transform, false);
             准星.AddComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
             准星.AddComponent<CanvasRenderer>();
-            准星.AddComponent<Image>().color = new(255, 255, 255, 1);
-            准星.GetComponent<Image>().sprite = 加载资源<Texture2D>("Assets/素材/零碎图片素材/准星.png").ToSprite();
+            准星.AddComponent<Image>().color = new(0, 0, 0, 0.5f);
 
             自由视角指示物体 = new GameObject("自由视角指示物体");
             自由视角指示物体.transform.SetParent(gameObject.transform, false);
@@ -208,7 +194,7 @@ namespace 战雷革命 {
             Vector3 注视点 = gameObject.transform.position + 上移;
             Camera.main.transform.LookAt(注视点);
         }
-        void 发射导弹(挂载类型 类型) {
+        void 发射导弹(导弹类型 类型) {
             //查找
             var 匹配挂架 = 挂点.Find(t =>
                 t.挂载物体 != null

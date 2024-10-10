@@ -12,7 +12,7 @@ public class 单元测试 : MonoBehaviour {
     void Start() {
 
         var A = new 玩家游玩数据();
-        A.u = new 玩家进入数据();
+        A.u = new 玩家登录数据();
         A.u.n = "123456";
         A.u.tp = 载具类型.m15n23;
         A.p = new 玩家世界数据();
@@ -24,8 +24,8 @@ public class 单元测试 : MonoBehaviour {
         A.射 = new int[] { 1, 1 };
         A.msl = new List<导弹飞行数据>() {
             new 导弹飞行数据(){
-                编号=1,
-                tp=挂载类型.AIM9E,
+                i=1,
+                tp=导弹类型.AIM9E,
                 v=new Vector3(0.3235684523f, 0.3654684651f, 0.345646456465f).To向量3(),
                 d=new Quaternion(0.3235684523f, 0.3654684651f, 0.345646456465f, 0.345646456465f).To向量4(),
                 p=new Vector3(0.3235684523f, 0.3654684651f, 0.345646456465f).To向量3(),

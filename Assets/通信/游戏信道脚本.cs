@@ -10,13 +10,9 @@ using System;
 
 public class 游戏服务器信道类 : 网络信道类_Kcp {
     public 游戏服务器信道类(string 版本) : base(版本) { }
-    public void 发送登录验证(string 名称, string 密码) {
-
-    }
-    public void 上传损坏提示(string 攻击者, 部位 损坏数据) {
+    public void 损坏(部位 损坏数据) {
         Send(
             ("标题", "损坏"),
-            ("攻击者", 攻击者),
             ("数据", 损坏数据.ToString())
             );
     }
@@ -36,7 +32,7 @@ public class 游戏服务器信道类 : 网络信道类_Kcp {
             ("标题", "导弹发射"),
             ("数据", 发射数据.ToJson()));
     }
-    public void 发送重生(玩家进入数据 登录数据) {
+    public void 发送重生(玩家登录数据 登录数据) {
         Send(
             ("标题", "重生"),
             ("数据", 登录数据.ToJson()));
@@ -52,7 +48,7 @@ public class 游戏服务器信道类 : 网络信道类_Kcp {
             ("内容", 内容),
             ("发送者", 名称));
     }
-    public void 登录(玩家进入数据 数据) {
+    public void 登录(玩家登录数据 数据) {
         Send(
             ("标题", "登录"),
             ("数据", 数据.ToJson()));

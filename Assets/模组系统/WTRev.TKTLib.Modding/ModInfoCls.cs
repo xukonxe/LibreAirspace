@@ -14,10 +14,6 @@ namespace WTRev.TKTLib.Modding.InfoCls {
 		public const string BINARY = "BINARY";
 
 		public const string SCRIPT_CSHARP = "SCRIPT_CSHARP";
-
-		public const string SCRIPT_CSHARP_CLIENT_SIDE_ONLY = "SCRIPT_CSHARP_CLIENT_SIDE_ONLY";
-
-		public const string SCRIPT_CSHARP_SERVER_SIDE_ONLY = "SCRIPT_CSHARP_SERVER_SIDE_ONLY";
 	}
 
 	[JsonObject]
@@ -68,12 +64,6 @@ namespace WTRev.TKTLib.Modding.InfoCls {
 		private string _guid;
 		[JsonProperty(Required = Required.Always, PropertyName = "FileTable")]
 		private ModFileInfo[] _filetable;
-
-		/// <summary>
-		/// 模组包的Sha512校验和。
-		/// </summary>
-		[JsonIgnore]
-		public byte[] m_ModPackSha512Sum;
 
 		/// <summary>
 		/// 模组的一般名称
@@ -145,7 +135,6 @@ namespace WTRev.TKTLib.Modding.InfoCls {
 		元数据解析失败 = (2 << 4) | 失败,
 		编译脚本失败 = (3 << 4) | 失败,
 		缺少模组主类 = (4 << 4) | 失败,
-		没有元数据 = (5 << 4) | 失败,
 
 		//非致命错误
 		缺失资产文件 = 1 << 16,

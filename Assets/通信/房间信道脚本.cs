@@ -19,30 +19,5 @@ namespace 战雷革命 {
             });
             return 数据["房间列表"].JsonToCS<所有房间数据类>();
         }
-        public async Task 登录(string 用户名, string 密码, Action 成功, Action<string> 失败) {
-            var 返回消息 = await 游戏端.SendAsync(new() {
-                { "标题","登录"},
-                { "账号",用户名},
-                { "密码",密码},
-            });
-            //处理回调
-            if (返回消息.ContainsKey("状态")
-                &&
-                返回消息["状态"] == "登录成功") 成功();
-            if (返回消息.ContainsKey("验证失败")) 失败(返回消息["验证失败"]);
-        }
-        public async Task 注册(string 用户名, string 密码, Action 成功, Action<string> 失败) {
-            var 返回消息 = await 游戏端.SendAsync(new() {
-                { "标题","注册"},
-                { "账号",用户名},
-                { "密码",密码},
-            });
-            //处理回调
-            if (返回消息.ContainsKey("状态")) {
-                if (返回消息["状态"] == "注册成功") 成功();
-                else 失败(返回消息["状态"]);
-            }
-            if (返回消息.ContainsKey("验证失败")) 失败(返回消息["验证失败"]);
-        }
     }
 }
